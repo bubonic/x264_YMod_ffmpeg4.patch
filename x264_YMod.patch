@@ -1,5 +1,5 @@
---- libx264.c	2018-09-25 20:20:46.319365340 -0500
-+++ /home/bubonic/Builds/FFmpeg/libavcodec/libx264.c	2018-09-25 20:39:22.862901783 -0500
+--- libavcodec/libx264.c	2018-09-25 20:20:46.319365340 -0500
++++ /home/bubonic/Builds/FFmpeg/libavcodec/libx264.c	2018-10-20 23:05:57.875089617 -0500
 @@ -50,6 +50,7 @@
      char *preset;
      char *tune;
@@ -100,7 +100,7 @@
              int i;
              av_log(avctx, AV_LOG_ERROR, "Error setting profile %s.\n", x4->profile);
              av_log(avctx, AV_LOG_INFO, "Possible profiles:");
-@@ -935,14 +1000,33 @@
+@@ -935,14 +1000,36 @@
      { "crf",           "Select the quality for constant quality mode",    OFFSET(crf),           AV_OPT_TYPE_FLOAT,  {.dbl = -1 }, -1, FLT_MAX, VE },
      { "crf_max",       "In CRF mode, prevents VBV from lowering quality beyond this point.",OFFSET(crf_max), AV_OPT_TYPE_FLOAT, {.dbl = -1 }, -1, FLT_MAX, VE },
      { "qp",            "Constant quantization parameter rate control method",OFFSET(cqp),        AV_OPT_TYPE_INT,    { .i64 = -1 }, -1, INT_MAX, VE },
@@ -123,6 +123,9 @@
 +    { "aq2-sensitivity", "Center of 2AQ curve", OFFSET(aq2_sensitivity), AV_OPT_TYPE_FLOAT, {.dbl = -1}, -1, FLT_MAX, VE},
 +    { "aq3-sensitivity", "Center of 3AQ curve", OFFSET(aq3_sensitivity), AV_OPT_TYPE_FLOAT, {.dbl = -1}, -1, FLT_MAX, VE},
 +    { "aq3-boundary",    "OreAQ boundary.", OFFSET(aq3_boundary), AV_OPT_TYPE_STRING,  {0 }, 0, 0, 0, VE},
++    { "aq-ifactor",   "2nd AQ strength factor of I-frames [1.00]", OFFSET(aq_ifactor), AV_OPT_TYPE_FLOAT, {.dbl = -1}, -1, FLT_MAX, VE},
++    { "aq-bfactor",   "2nd AQ strength factor of B-frames [1.00]", OFFSET(aq_bfactor), AV_OPT_TYPE_FLOAT, {.dbl = -1}, -1, FLT_MAX, VE},
++    { "aq-pfactor",   "2nd AQ strength factor of P-frames [1.00]", OFFSET(aq_pfactor), AV_OPT_TYPE_FLOAT, {.dbl = -1}, -1, FLT_MAX, VE},
 +    { "aq2-ifactor",   "2nd AQ strength factor of I-frames [1.00]", OFFSET(aq2_ifactor), AV_OPT_TYPE_FLOAT, {.dbl = -1}, -1, FLT_MAX, VE},
 +    { "aq2-bfactor",   "2nd AQ strength factor of B-frames [1.00]", OFFSET(aq2_bfactor), AV_OPT_TYPE_FLOAT, {.dbl = -1}, -1, FLT_MAX, VE},
 +    { "aq2-pfactor",   "2nd AQ strength factor of P-frames [1.00]", OFFSET(aq2_pfactor), AV_OPT_TYPE_FLOAT, {.dbl = -1}, -1, FLT_MAX, VE},
